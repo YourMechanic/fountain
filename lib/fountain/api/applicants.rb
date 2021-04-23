@@ -16,13 +16,16 @@ module Fountain
       #                 stage - Filter applicants by stage type
       #                 labels - MUST be URL-encoded
       #                 cursor - Cursor parameter for cursor-based pagination
+      #                 created_at - Applicant creation time (dates and times in ISO8601 format, and the timezone is UTC. ie 2017-04-17T14:00:00)
+      #                 created_at[gt] - Applicant creation time greater than(dates and times in ISO8601 format, and the timezone is UTC. ie 2017-04-17T14:00:00)
+      #                 created_at[lt] - Applicant creation time less than(dates and times in ISO8601 format, and the timezone is UTC. ie 2017-04-17T14:00:00)
       # @return [Fountain::Applicants]
       def self.list(filter_options = {})
         response = request_json(
           '/v2/applicants',
           body: Util.slice_hash(
             filter_options,
-            :funnel_id, :stage_id, :stage, :labels, :cursor
+            :funnel_id, :stage_id, :stage, :labels, :cursor, :created_at, 'created_at[gt]', 'created_at[lt]'
           )
         )
         Fountain::Applicants.new response
