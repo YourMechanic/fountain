@@ -35,6 +35,11 @@ module Fountain
       raw_data['name']
     end
 
+    # Rejection Reason
+    def rejection_reason
+      raw_data['rejection_reason']
+    end
+
     # Phone number
     def phone_number
       raw_data['phone_number']
